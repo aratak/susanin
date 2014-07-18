@@ -24,7 +24,7 @@ By default gems do nothing. Include module 'susanin' to the controller.
 class ApplicationController < ActionController::Base
   include ::Susanin
 
-  polymorphic_url_prefix do
+  susanin do
     {
       Admin => ->(resource) { [resource.company, resource] },
       Photo => ->(resource) { [resource.admin.company, resource.admin, resource] },
