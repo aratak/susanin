@@ -15,8 +15,14 @@ module Susanin
       @resources.default = default
     end
 
-    def get(record)
-      @resources[get_key(record)][record]
+    def get(record, resources=@resources)
+      result = resources[get_key(record)][record]
+
+      if result.is_a?(Array)
+        result.map { |i| get(i, resources.except(get_key(record))) }
+      else
+        result
+      end
     end
 
     protected
