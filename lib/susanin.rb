@@ -16,7 +16,16 @@ module Susanin
     end
 
     def get(record)
-      @resources[record.class][record]
+      @resources[get_key(record)][record]
+    end
+
+    protected
+
+    def get_key(record)
+      case record
+        when Symbol, String then record
+        else record.class
+      end
     end
 
   end
