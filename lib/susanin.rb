@@ -51,6 +51,7 @@ module Susanin
 
   def polymorphic_url(record_or_hash_or_array, options={})
     parameters = Array.wrap(record_or_hash_or_array).map {|i| susanin.get(i) }.flatten
+    default_options = parameters.extract_options!
     super(parameters, options)
   end
 
