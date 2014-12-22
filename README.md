@@ -1,7 +1,6 @@
 # Susanin
 
 Extend `polymorphic_url` to replace simple resource with array of resources.
-Extend `polymorphic_url` to replace simple resource with array of resources.
 
 ## Installation
 
