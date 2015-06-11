@@ -4,8 +4,8 @@ module Susanin
   extend ActiveSupport::Concern
 
   included do
-    hide_action :polymorphic_url
-    helper_method :polymorphic_url
+    hide_action :polymorphic_url, :polymorphic_path
+    helper_method :polymorphic_url, :polymorphic_path
   end
 
   class Resource
@@ -50,6 +50,12 @@ module Susanin
   end
 
   def polymorphic_url(record_or_hash_or_array, options={})
+    parameters = Array.wrap(record_or_hash_or_array).map {|i| susanin.get(i) }.flatten
+    default_options = parameters.extract_options!
+    super(parameters, default_options.merge(options))
+  end
+
+  def polymorphic_path(record_or_hash_or_array, options={})
     parameters = Array.wrap(record_or_hash_or_array).map {|i| susanin.get(i) }.flatten
     default_options = parameters.extract_options!
     super(parameters, default_options.merge(options))
